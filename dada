@@ -1,0 +1,17 @@
+import pandas as pd
+
+lst = ['robot'] * 10
+lst += ['human'] * 10
+random.shuffle(lst)
+data = pd.DataFrame({'whoAmI': lst})
+
+# Создаем DataFrame с one-hot кодировкой
+one_hot_encoded = pd.get_dummies(data['whoAmI'])
+
+# Объединяем исходный DataFrame с one-hot DataFrame
+result = pd.concat([data, one_hot_encoded], axis=1)
+
+# Удаляем исходный столбец 'whoAmI'
+result.drop(columns=['whoAmI'], inplace=True)
+
+result.head()
